@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Rhema",
+  "version": "0.1.0",
+  "identifier": "com.rhema.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Rhema Studio - Panel de Control",
+        "url": "index.html?window=main",
+        "width": 1240,
+        "height": 780,
+        "resizable": true,
+        "decorations": true,
+        "visible": true,
+        "focus": true,
+        "center": true
+      },
+      {
+        "label": "projector",
+        "title": "Rhema Live - Proyector",
+        "url": "index.html?window=projector",
+        "width": 800,
+        "height": 450,
+        "x": 60,
+        "y": 60,
+        "resizable": true,
+        "decorations": false,
+        "visible": true,
+        "alwaysOnTop": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "resources": {
+      "../../rhema-engine/dist/rhema-engine/": "rhema-engine/"
+    },
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["Spanish", "English"],
+        "displayLanguageSelector": false
+      }
+    }
+  }
+}

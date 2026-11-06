@@ -1,0 +1,5 @@
+vosk>=0.3.45
+sounddevice>=0.4.6
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+websockets>=12.0

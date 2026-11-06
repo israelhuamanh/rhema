@@ -1,0 +1,44 @@
+# Binarios e instaladores
+*.exe
+*.msi
+*.dll
+*.pdb
+
+# Python
+venv/
+.venv/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+**/build/
+rhema-engine/build/
+rhema-engine/dist/
+
+# Vosk Models & Archivos grandes
+rhema-engine/models/*
+!rhema-engine/models/.gitkeep
+*.zip
+*.tar.gz
+
+# Node / Frontend
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vite/
+.eslintcache
+
+# Rust / Tauri
+target/
+**/target/
+src-tauri/target/
+
+# IDEs & Sistema Operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
