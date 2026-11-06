@@ -20,6 +20,7 @@ import { AudioSelector } from "../components/AudioSelector";
 import { LiveTranscript } from "../components/LiveTranscript";
 import { VerseQueue } from "../components/VerseQueue";
 import { useRhemaSocket } from "../hooks/useRhemaSocket";
+import { searchDemoVerses } from "../services/demoVerseService";
 import type { VersePayload } from "../types/rhema";
 
 export const StudioWindow: React.FC = () => {
@@ -45,6 +46,10 @@ export const StudioWindow: React.FC = () => {
     changeAudioDevice,
     refreshAudioDevices,
     searchVerses,
+    isWebSpeechSupported,
+    isListeningWebSpeech,
+    toggleWebSpeech,
+    triggerSampleVerse,
   } = useRhemaSocket({ autoMode });
 
   const syncProjectorStatus = useCallback(async () => {
@@ -159,6 +164,16 @@ export const StudioWindow: React.FC = () => {
     }
   };
 
+  const handleSampleSelect = useCallback(
+    (sampleRef: string) => {
+      const results = searchDemoVerses(sampleRef);
+      if (results.length > 0) {
+        triggerSampleVerse(results[0]);
+      }
+    },
+    [triggerSampleVerse]
+  );
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       {/* Barra Superior de Producción */}
@@ -171,11 +186,11 @@ export const StudioWindow: React.FC = () => {
             <h1 className="text-base font-bold tracking-wide text-slate-100 flex items-center gap-2">
               RHEMA STUDIO
               <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                Producción en Vivo
+                {isConnected ? "Producción en Vivo" : "Modo Web Demo"}
               </span>
             </h1>
             <p className="text-xs text-slate-400">
-              Proyector Bíblico Automatizado · 100% Local
+              Proyector Bíblico Automatizado · {isConnected ? "100% Local (Vosk)" : "Web Interactiva"}
             </p>
           </div>
         </div>
@@ -271,7 +286,14 @@ export const StudioWindow: React.FC = () => {
       <main className="flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-[1600px] w-full mx-auto">
         {/* Columna Izquierda (7 cols): Monitor de Voz + Tarjeta Previa (Modo Operador) + Cola */}
         <div className="lg:col-span-7 flex flex-col gap-5">
-          <LiveTranscript partialText={partialText} isConnected={isConnected} />
+          <LiveTranscript
+            partialText={partialText}
+            isConnected={isConnected}
+            isWebSpeechSupported={isWebSpeechSupported}
+            isListeningWebSpeech={isListeningWebSpeech}
+            onToggleWebSpeech={toggleWebSpeech}
+            onSampleSelect={handleSampleSelect}
+          />
 
           {/* Tarjeta Previa de Aprobación cuando está activo el Modo Operador */}
           {!autoMode && (
