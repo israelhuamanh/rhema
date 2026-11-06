@@ -60,8 +60,8 @@ flowchart TD
 
 ## 🚀 Despliegue y Demo en Vivo
 
-- **Aplicación Web:** [https://rhema-app.vercel.app](https://rhema-app.vercel.app) *(Próximamente / Configurable en Vercel)*
-- **Modo Proyector Web:** `/?window=projector`
+- **Aplicación Web:** [https://israelhuamanh.github.io/rhema/](https://israelhuamanh.github.io/rhema/)
+- **Modo Proyector Web:** [https://israelhuamanh.github.io/rhema/?window=projector](https://israelhuamanh.github.io/rhema/?window=projector)
 
 ---
 

@@ -6,7 +6,8 @@ import type {
   VersePayload,
 } from "../types/rhema";
 
-const WS_URL = "ws://127.0.0.1:8765/ws";
+const WS_URL =
+  (import.meta as any).env?.VITE_WS_URL || "ws://127.0.0.1:8765/ws";
 const RECONNECT_DELAY_MS = 2000;
 
 export interface UseRhemaSocketOptions {

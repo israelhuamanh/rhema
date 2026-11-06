@@ -73,7 +73,9 @@ export const StudioWindow: React.FC = () => {
       setProjectorOpen(status.isOpen);
       setProjectorFullscreen(status.isFullscreen);
     } catch {
-      // Ignorar
+      // Fuera de Tauri: abrir en nueva ventana/pestaña
+      window.open("./?window=projector", "RhemaProjector", "width=1280,height=720");
+      setProjectorOpen(true);
     }
   }, []);
 
